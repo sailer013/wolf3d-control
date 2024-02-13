@@ -45,14 +45,19 @@ def main():
         lower_bound = np.array([int(nr) for nr in args.lower_limit])
         upper_bound = np.array([int(nr) for nr in args.upper_limit])
         mask = cv2.inRange(hsv, lower_bound, upper_bound)
-        img = cv2.bitwise_and(img, img, mask=mask)
+        masked_img = cv2.bitwise_and(img, img, mask=mask)
 
     if args.colour:
         cv2.setMouseCallback('debug', get_colour, param=img)
 
     while True:
-        cv2.imshow('debug', img)
-        k = cv2.waitKey(1) & 0xFF == ord('q')
+        if args.lower_limit and args.upper_limit:
+            cv2.imshow('debug', img)
+            cv2.waitKey(2000)
+            cv2.imshow('debug', masked_img)
+        else:
+            cv2.imshow('debug', img)
+        k = cv2.waitKey(2000) & 0xFF == ord('q')
         if k:
             break
 
