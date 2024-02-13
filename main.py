@@ -1,7 +1,6 @@
 import numpy as np
 import cv2
 from mss import mss
-from PIL import Image
 
 WIDTH = 1028
 HEIGHT = 672
